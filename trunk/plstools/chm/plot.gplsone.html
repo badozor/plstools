@@ -1,0 +1,104 @@
+<html><head><title>Plot Diagnostics for an gplsone Object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>plot.gplsone(plstools)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   plot.gplsone">
+<param name="keyword" value=" Plot Diagnostics for an gplsone Object">
+</object>
+
+
+<h2>Plot Diagnostics for an gplsone Object</h2>
+
+
+<h3>Description</h3>
+
+<p>
+in construction
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'gplsone':
+plot(x,xax=1,yax=2,...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+an object of class inheriting from 'gplsone'</td></tr>
+<tr valign="top"><td><code>xax</code></td>
+<td>
+the column number for the x-axis</td></tr>
+<tr valign="top"><td><code>yax</code></td>
+<td>
+the column number for the y-axis</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+further arguments passed to or from other methods.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The selected plots are drawn on a graphics device.<br>
+1: Observed vs Expected values<br>
+2: Normal QQ-plot of residuals<br>
+3: Representation of Components th (in 2 dimensions, by default xax=1 and yax=2).<br>
+4: Prediction vs the <i>h^{th}</i> component (by default xax=1).<br>
+6: Representation of Weights (in 2 dimensions, by default xax=1 and yax=2).<br>
+9: Representation of correlations with the conponents
+(in 2 dimensions, by default xax=1 and yax=2) <br>
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+x is invisibly returned.</p>
+
+<h3>References</h3>
+
+<p>
+Tenenhaus M.(1998) La Regression PLS. Theorie et pratique. Technip, Paris.<br>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="gplsone.html">gplsone</a></code>, <code><a onclick="findlink('stats', 'qqnorm.html')" style="text-decoration: underline; color: blue; cursor: hand">qqnorm</a></code>,
+<code><a onclick="findlink('ade4', 's.arrow.html')" style="text-decoration: underline; color: blue; cursor: hand">s.arrow</a></code>,
+<code><a onclick="findlink('ade4', 's.label.html')" style="text-decoration: underline; color: blue; cursor: hand">s.label</a></code>, <code><a onclick="findlink('stats', 'plot.glm.html')" style="text-decoration: underline; color: blue; cursor: hand">plot.glm</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+require(pls)
+data(yarn)
+
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>plstools</em> version 1.0-5 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,90 @@
+# example for GPLSONE function
+== MOtivation ==
+
+Add your content here.
+
+
+== Details ==
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
+
+== Results ==
+
+=== Missing Data effects ===
+
+We compare our function (gplsone) with the gpls function from the package 'gpls'
+{{{
+> require(gpls)
+> require(MASS)
+> head(Pima.tr)
+  npreg glu bp skin  bmi   ped age type
+1     5  86 68   28 30.2 0.364  24   No
+2     7 195 70   33 25.1 0.163  55  Yes
+3     5  77 82   41 35.8 0.156  35   No
+4     0 165 76   43 47.9 0.259  26   No
+5     0 107 60   25 26.4 0.133  23   No
+6     5  97 76   27 35.6 0.378  52  Yes
+> 
+> Pima.tr$y <- ifelse(Pima.tr$type=="Yes",1,0)
+> head(Pima.tr)
+  npreg glu bp skin  bmi   ped age type y
+1     5  86 68   28 30.2 0.364  24   No 0
+2     7 195 70   33 25.1 0.163  55  Yes 1
+3     5  77 82   41 35.8 0.156  35   No 0
+4     0 165 76   43 47.9 0.259  26   No 0
+5     0 107 60   25 26.4 0.133  23   No 0
+6     5  97 76   27 35.6 0.378  52  Yes 1
+> 
+> summary(Pima.tr)
+     npreg            glu              bp              skin            bmi       
+ Min.   : 0.00   Min.   : 56.0   Min.   : 38.00   Min.   : 7.00   Min.   :18.20  
+ 1st Qu.: 1.00   1st Qu.:100.0   1st Qu.: 64.00   1st Qu.:20.75   1st Qu.:27.57  
+ Median : 2.00   Median :120.5   Median : 70.00   Median :29.00   Median :32.80  
+ Mean   : 3.57   Mean   :124.0   Mean   : 71.26   Mean   :29.21   Mean   :32.31  
+ 3rd Qu.: 6.00   3rd Qu.:144.0   3rd Qu.: 78.00   3rd Qu.:36.00   3rd Qu.:36.50  
+ Max.   :14.00   Max.   :199.0   Max.   :110.00   Max.   :99.00   Max.   :47.90  
+      ped              age         type           y       
+ Min.   :0.0850   Min.   :21.00   No :132   Min.   :0.00  
+ 1st Qu.:0.2535   1st Qu.:23.00   Yes: 68   1st Qu.:0.00  
+ Median :0.3725   Median :28.00             Median :0.00  
+ Mean   :0.4608   Mean   :32.11             Mean   :0.34  
+ 3rd Qu.:0.6160   3rd Qu.:39.25             3rd Qu.:1.00  
+ Max.   :2.2880   Max.   :63.00             Max.   :1.00  
+>
+> # function 'gpls' from package 'gpls'
+> # The code in this function uses the extension proposed by Ding and Gentleman, 2004 
+> gp1  <-  gpls(y~., data=Pima.tr[,!is.element(names(Pima.tr),"type")], K=3,family="binomial")
+> summary(gp1)
+               Length Class  Mode     
+coefficients   8      -none- numeric  
+convergence    1      -none- logical  
+niter          1      -none- numeric  
+family         1      -none- character
+link           1      -none- character
+levs           2      -none- numeric  
+bias.reduction 1      -none- logical  
+terms          3      terms  call     
+call           5      -none- call     
+> gp1
+
+Call:
+gpls.formula(formula = y ~ ., data = Pima.tr[, !is.element(names(Pima.tr),     "type")], K.prov = 3, family = "binomial")
+
+Coefficients:
+Intercept      npreg        glu         bp       skin        bmi        ped        age  
+-7.451645   0.023364   0.030299  -0.013042   0.023510   0.042621   0.003947   0.050038  
+> 
+> # function 'gplsone' from package 'plstools'
+> 
+> 
+> 
+}}}
+
+
+=== Performances ===
+gplsone
+
+=> two versions coded in R or in C.

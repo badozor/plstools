@@ -1,0 +1,32 @@
+#labels Phase-QA,Phase-Support
+== Motivation ==
+
+This example propose a comparison between the functions 'plsone' and 'plsr' containing in the package 'pls'.
+
+
+== Example ==
+
+{{{
+require(pls)
+data(yarn)
+yarn.pls <- plsr(density ~ NIR, 6, data = yarn, validation = "CV")
+plstest1 <- plsone(density ~ NIR, nf=6, data = yarn,scale=FALSE)
+cor(plstest1$th,yarn.pls$scores)
+cor(fitted(plstest1),yarn.pls$fitted.values[,,6])gplsone 3
+plot(fitted(plstest1),yarn.pls$fitted.values[,,6],pch=20,panel.first=c(grid()),cex=2)
+abline(0,1,col="red")
+abline(0,1,col="red",lwd=2)
+plstest2 <- update(plstest1,nf=2)
+plstest2
+plstest1
+summary(plstest1)
+summary(plstest2)
+plot(plstest1,which.par=1:2)
+plot(plstest1,which.par=c(1:2,6)
+}}}
+
+test:
+
+
+http://code.google.com/images/code_sm.png
+

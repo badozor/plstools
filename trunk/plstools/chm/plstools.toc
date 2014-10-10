@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HEAD></HEAD><HTML><BODY>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package plstools:  Contents">
+<param name="Local" value="00Index.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package plstools:  R objects">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="plstools-package">
+<param name="Local" value="plstools-package.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="cgplsone.fit">
+<param name="Local" value="gplsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="coef.plsone">
+<param name="Local" value="plsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="coefficients.plsone">
+<param name="Local" value="plsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="cplsone.fit">
+<param name="Local" value="plsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="delete.intercept">
+<param name="Local" value="plsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="fitted.plsone">
+<param name="Local" value="plsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="formula.plsone">
+<param name="Local" value="plsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="gplsone">
+<param name="Local" value="gplsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="gplsone.fit">
+<param name="Local" value="gplsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="plot.gplsone">
+<param name="Local" value="plot.gplsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="plot.plsone">
+<param name="Local" value="plot.plsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="plsone">
+<param name="Local" value="plsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="plsone.fit">
+<param name="Local" value="plsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="plstools">
+<param name="Local" value="plstools-package.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="predict.gplsone">
+<param name="Local" value="predict.gplsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="predict.plsone">
+<param name="Local" value="predict.plsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="print.plsone">
+<param name="Local" value="plsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="print.summary.gplsone">
+<param name="Local" value="summary.gplsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="print.summary.plsone">
+<param name="Local" value="summary.plsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="residuals.gplsone">
+<param name="Local" value="gplsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="residuals.plsone">
+<param name="Local" value="plsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="scalew">
+<param name="Local" value="gplsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="summary.gplsone">
+<param name="Local" value="summary.gplsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="summary.plsone">
+<param name="Local" value="summary.plsone.html">
+</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package plstools:  Titles">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="GPLS model based on NIPALS algorithm">
+<param name="Local" value="gplsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Plot Diagnostics for an gplsone Object">
+<param name="Local" value="plot.gplsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Plot Diagnostics for an plsone Object">
+<param name="Local" value="plot.plsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="PLS regression based on NIPALS algorithm">
+<param name="Local" value="plsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="PLS regression based on NIPALS algoritm">
+<param name="Local" value="plstools-package.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Predict method for Generalized Partial Least Squares Fits">
+<param name="Local" value="predict.gplsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Predict method for Partial Least Squares Fits">
+<param name="Local" value="predict.plsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Summarizing Generalized Partial Least Squares model">
+<param name="Local" value="summary.gplsone.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Summarizing Partial Least Squares regression">
+<param name="Local" value="summary.plsone.html">
+</OBJECT>
+</UL>
+</UL>
+</BODY></HTML>

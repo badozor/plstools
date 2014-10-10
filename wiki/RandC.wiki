@@ -1,0 +1,231 @@
+== Motivation ==
+
+This section present some elements of the interfacing R and C.
+
+
+== Matrix multiplication ==
+
+=== C code ===
+header file called multimat.h
+{{{
+# include <stdio.h>
+# include <stdlib.h>
+# include <math.h>
+# include <Rinternals.h>
+# include <R_ext/Applic.h>
+# include <R_ext/Lapack.h>
+
+void prodAB(int* l1, int* c1, int* c2, double* A, double* B, double* C);
+void L_prodAB(int* na, int* pa, int* nb, int* pb, double* A, double* B, double* C);
+}}}
+
+
+file .c: multimat.c
+{{{
+# include "multimat.h"
+# define TOL 1.0e-20
+
+void prodAB(int* l1, int* c1, int* c2, double* A, double* B, double* C){
+  int i,j,k,lig1,col1,col2;
+  lig1 = *l1;
+  col1 = *c1;
+  col2 = *c2;
+  double s;
+  for(i=0;i<lig1;i++)
+    for(k=0;k<col2;k++){
+      s = 0;
+      for(j=0;j< col1;j++)
+        s = s + A[i+(lig1*j)] * B[j+(col1*k)];
+      C[i+(lig1*k)] = s;
+    }
+}
+//we use a function called 'dgemm' from BLAS 
+void L_prodAB(int* na, int* pa, int* nb, int* pb, double* A, double* B, double* C){
+  char *transa = "N", *transb = "N";
+  double alpha = 1.0, beta = 0.0;
+  F77_CALL(dgemm)(transa,transb,na,pb,pa,&alpha,A,na,B,nb,&beta,C,na);
+}
+}}}
+
+=== Compilation ===
+
+{{{
+R CMD SHLIB multimat.c
+
+or
+
+gcc --shared -o multimat.dll multimat.c
+}}}
+
+For more details, you can consult the R documentation (e.g. Writing R extensions)and the following link: Building R for Windows, http://www.murdoch-sutherland.com/Rtools/.
+
+=== Functions in R ===
+
+{{{
+dyn.load(paste(getwd(),"/multimat.dll",sep=""))
+prodMat <- function(A,B){
+  lig1 <- nrow(A)
+  col1 <- ncol(A)
+  col2 <- ncol(B)
+  C <- matrix(0,nr=lig1,nc=col2)
+  w <- .C("prodAB",as.integer(lig1),as.integer(col1),as.integer(col2),as.double(A),as.double(B),as.double(C))[[6]]
+  w <- matrix(w,nr=lig1,nc=col2)
+  return(w)
+}
+prodMatR <- function(A,B){
+  lig1 <- nrow(A)
+  col1 <- ncol(A)
+  col2 <- ncol(B)
+  C <- matrix(0,nr=lig1,nc=col2)
+  for(i in 1:lig1)
+  for(k in 1:col2){
+    s = 0;
+    for(j in 1:col1)
+    s = s+sum(A[i+(j-1)*lig1]*B[j+(k-1)*col1])
+    C[i+(k-1)*lig1] = s
+  }
+  return(C)
+}
+prodAB <- function(A,B){
+  na <- nrow(A)
+  pa <- ncol(A)
+  nb <- nrow(B)
+  pb <- ncol(B)
+  C <- matrix(0,nr=na,nc=pb)
+  w <- .C("L_prodAB",as.integer(na),as.integer(pa),as.integer(nb),as.integer(pb),as.double(A),as.double(B),as.double(C))[[7]]
+  w <- matrix(w,nr=na,nc=pb)
+  return(w)
+}
+}}}
+
+=== Performance analysis ===
+
+{{{
+A <- matrix(rnorm(20),nr=5,nc=4)
+B <- matrix(rnorm(12),nr=4,nc=3)
+
+A%*%B
+prodMat(A,B)
+prodMatR(A,B)
+prodAB(A,B)
+
+system.time (A%*%B)
+system.time(prodMat(A,B))
+system.time(prodMatR(A,B))
+system.time(prodAB(A,B))
+}}}
+
+=== scaling and centering ===
+{{{
+scaleA <- function(A){
+  na <- nrow(A)
+  pa <- ncol(A)
+  B <- matrix(0,nr=na,nc=pa)
+  w <- .C("ScaleX",as.integer(na),as.integer(pa),as.double(A),as.double(B))[[4]]
+  w <- matrix(w,nr=na,nc=pa)
+  return(w)
+}
+R> x <- matrix(rnorm(20),nc=4,nr=5)
+R> apply(x,2,function(x) (x-mean(x))/sqrt(sum((x-mean(x))^2)/length(x)) )
+            [,1]        [,2]       [,3]        [,4]
+[1,] -0.21085214 -0.02819112 -0.0948666  1.84703136
+[2,] -0.04826396  1.81043348 -1.4395924 -0.08911111
+[3,]  0.27300337 -1.24762798 -0.3936764 -0.96593954
+[4,]  1.55487977 -0.16229765  0.2914831  0.01259162
+[5,] -1.56876704 -0.37231673  1.6366523 -0.80457232
+R> scaleA(x)
+            [,1]        [,2]       [,3]        [,4]
+[1,] -0.21085214 -0.02819112 -0.0948666  1.84703136
+[2,] -0.04826396  1.81043348 -1.4395924 -0.08911111
+[3,]  0.27300337 -1.24762798 -0.3936764 -0.96593954
+[4,]  1.55487977 -0.16229765  0.2914831  0.01259162
+[5,] -1.56876704 -0.37231673  1.6366523 -0.80457232
+R> 
+}}}
+
+
+
+
+
+== Status of missing values ==
+
+=== C code ===
+
+header file: SumNA.h
+{{{
+# include <math.h>
+# include <R.h>
+# include <Rdefines.h>
+# include <Rmath.h>
+
+void SumNa(int* n,double* X,double* S);
+void retNA(double* S); 
+}}}
+
+file .c: SumNA.c
+{{{
+# include "SumNA.h"
+
+void SumNa(int* n,double* x,double* S){
+  int i,nx;
+  double w = 0;
+  nx = *n;
+  for(i=0;i<nx;i++)
+    if(R_FINITE(x[i]))
+      w +=x[i];
+  S[0] = w;
+}
+void retNA(double* S){
+  S[1]=NA_REAL;
+}
+}}}
+
+=== Compilation ===
+
+{{{
+R CMD SHLIB SumNA.c
+
+or
+
+gcc --shared -o SumNA.dll SumNA.c
+}}}
+For more details, you can consult the R documentation (e.g. Writing R extensions)and the following link: Building R for Windows, http://www.murdoch-sutherland.com/Rtools/.
+
+=== Functions in R ===
+
+{{{
+#### functions ####
+dyn.load("SumNA.dll")
+SumNA <- function(x){
+  w <- 0
+  .C("SumNA",as.integer(length(x)),as.double(x),as.double(w),NAOK = TRUE)[[3]]
+}
+#### test ####
+x <- c(rnorm(10),NA)
+y <- c(NA,rnorm(10))
+sum(x)
+sum(x,na.rm=T)
+SumNA(x)
+vec <- rnorm(10)
+vec
+.C("retNA",as.double(vec),NAOK=TRUE)[[1]]
+}}}
+
+== Appendix ==
+
+compilation C for win 64bits
+{{{
+R --arch x64 CMD SHLIB function.c
+}}}
+compilation for Linux and win 32 bits
+{{{
+R CMD SHLIB function.c
+}}}
+
+
+
+
+== References ===
+ * R Development Core Team (2008) R: A language and environment for statistical computing. In R Foundation for Statistical Computing. Vienna, Austria.
+ * 
+ * 

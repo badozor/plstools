@@ -1,0 +1,236 @@
+<html><head><title>PLS regression based on NIPALS algorithm</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>plsone(plstools)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   plsone">
+<param name="keyword" value="R:   plsone.fit">
+<param name="keyword" value="R:   cplsone.fit">
+<param name="keyword" value="R:   print.plsone">
+<param name="keyword" value="R:   coef.plsone">
+<param name="keyword" value="R:   coefficients.plsone">
+<param name="keyword" value="R:   fitted.plsone">
+<param name="keyword" value="R:   residuals.plsone">
+<param name="keyword" value="R:   formula.plsone">
+<param name="keyword" value="R:   delete.intercept">
+<param name="keyword" value=" PLS regression based on NIPALS algorithm">
+</object>
+
+
+<h2>PLS regression based on NIPALS algorithm</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Partial least squares regresssion based on NIPALS algorithm.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+plsone(formula, data,subset,na.action,nf = 2,scale=TRUE,method="plsone.fit",...)
+plsone.fit(y, X, nf = 2,scale=TRUE, ...)
+cplsone.fit(y, X, nf = 2,scale=TRUE, ...)
+## S3 method for class 'plsone':
+print(x, ...)
+## S3 method for class 'plsone':
+coef(object,type="components", ...)
+## S3 method for class 'plsone':
+coefficients(object, ...)
+## S3 method for class 'plsone':
+residuals(object, ...)
+## S3 method for class 'plsone':
+fitted(object, ...)
+## S3 method for class 'plsone':
+formula(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+an object of class inheriting from 'plsone'</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+an object of class inheriting from 'plsone'</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+an object of class <code>formula</code> (or one that can be coerced to that class):
+a symbolic description of the model to be fitted. The details of model specification are given under Details.</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+an optional data frame, list or environment (or object coercible by as.data.frame to a data frame)
+containing the variables in the model. If not found in data, the variables are taken from environment(formula)</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+an optional vector specifying a subset of observations to be used in the fitting process.</td></tr>
+<tr valign="top"><td><code>na.action</code></td>
+<td>
+a function which indicates what should happen when the data contain NAs. The default is set
+by the na.action setting of options, and is na.fail if that is unset. The 'factory-fresh' default is na.omit.
+Another possible value is NULL, no action. Value na.exclude can be useful. Value na.pass is used
+to take in account the missing values.</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+a numeric vector corresponding to the response</td></tr>
+<tr valign="top"><td><code>X</code></td>
+<td>
+a numeric data.frame corresponding to explanatory variables (see <code>model.matrix</code>)</td></tr>
+<tr valign="top"><td><code>nf</code></td>
+<td>
+an integer indicating the number of kept components</td></tr>
+<tr valign="top"><td><code>scale</code></td>
+<td>
+a logical value. If scale is TRUE, X is scaled by dividing each variable
+by its sample standard deviation (by deafult, scale=TRUE).</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+the method to be used in fitting the model. The default method "plsone.fit" uses partial least squares (PLS).
+The only current alternative is "model.frame" which returns the model frame and does no fitting.</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+the type of coefficient. The default "components" retruns the coefficients of regression of y on the components.
+The alternative "varaibles" gives coefficients based on initial explanatory variables</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+further arguments passed to or from other methods.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The function 'plsone' is regression methods based on partail least square.<br>
+The default method 'plsone.fit' uses NIPALS algorithm.<br>
+The Coordinates ch,th, ph and ch correspond to Slopes equation in linear least squares regression without intercept
+term and can be compute with missing data.<br>
++ additional details on the computation of the terms.<br>
++ The library propose two functuion to fit model: plsone.fit programmed only in R and cplsone.fit based on C programs.<br>
+The function plsone is base on the function delete.intercept from the library 'pls'.<br>
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+The function 'plsone' returns an object of class inheriting from 'plsone'.
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>lm</code></td>
+<td>
+an object 'lm' based on the PLS components (th)</td></tr>
+<tr valign="top"><td><code>bh</code></td>
+<td>
+an numeric vector which contains coefficients associated with the explanatory variables</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+a numeric vector corresponding to the response</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+a numeric data.frame corresponding to explanatory variables</td></tr>
+<tr valign="top"><td><code>ch</code></td>
+<td>
+a numeric vector containing regression coefficients of y on the components 'th'</td></tr>
+<tr valign="top"><td><code>th</code></td>
+<td>
+an object 'data.frame' containing the conponents 'th'.</td></tr>
+<tr valign="top"><td><code>uh</code></td>
+<td>
+an object 'data.frame' containing normalised residuals for h &gt; 1.</td></tr>
+<tr valign="top"><td><code>ph</code></td>
+<td>
+an object 'data.frame' containing regression coefficient  of the <i>h_{th}</i> columns of <i>X_{h-1}</i> on t(h).</td></tr>
+<tr valign="top"><td><code>wh</code></td>
+<td>
+an object 'data.frame' containing regression coefficient  of the <i>h_{th}</i> columns of <i>X_{h-1}</i> on y(h-1).</td></tr>
+<tr valign="top"><td><code>whx</code></td>
+<td>
+an object 'data.frame' containing regression coefficent of th on explanatory variables.</td></tr>
+<tr valign="top"><td><code>Q2</code></td>
+<td>
+a numeric vector conatining the criteria Q2 given by: <i>Q2=1-PRESS_{h}/RSS_{h-1}</i>.</td></tr>
+<tr valign="top"><td><code>nf</code></td>
+<td>
+an integer indicating the number of kept components.</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+the initial formula supplied.</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+the name of the fitter function used, currently always "plsone.fit". The C version is called "cplsone.fit".</td></tr>
+<tr valign="top"><td><code>call</code></td>
+<td>
+generally match.call()</td></tr>
+</table>
+
+<h3>Note</h3>
+
+<p>
+The function 'pls' use the function 'delete.intercept' from the package <code><a onclick="findlink('pls', 'pls-package.html')" style="text-decoration: underline; color: blue; cursor: hand">pls</a></code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Wold H. (1966) Estimation of principal components and related models by iterative least squares.
+In P. Krishnaiah, editors.Multivariate Analysis, Academic Press, 391–420.<br>
+Wold H. (1975) Modeling in Complex Situations with Soft Information, Third World
+Congress of Econometric Society, August 21-26, Toronto, Canada.<br>
+Wold S., Martens H. &amp; Wold H. (1983) « The multivariate calibration problem in chemistry
+solved by the PLS method», in  Proc. Conf. Matrix Pencils, Ruhe, A. &amp; Kågstrøm, B. (Eds),
+March 1982, Lecture Notes in Mathematics, Springer Verlag, Heidelberg, pp. 286- 293.<br>
+Tenenhaus M.(1998) La Regression PLS. Theorie et pratique. Technip, Paris.<br>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a onclick="findlink('pls', 'plsr.html')" style="text-decoration: underline; color: blue; cursor: hand">plsr</a></code>, <code><a onclick="findlink('pls', 'delete.intercept.html')" style="text-decoration: underline; color: blue; cursor: hand">delete.intercept</a></code>,
+<code><a onclick="findlink('pls', 'mvr.html')" style="text-decoration: underline; color: blue; cursor: hand">mvr</a></code>, <code><a onclick="findlink('stats', 'lm.html')" style="text-decoration: underline; color: blue; cursor: hand">lm</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+require(pls)
+data(yarn)
+yarn.pls &lt;- plsr(density ~ NIR, 6, data = yarn, validation = "CV")
+plstest1 &lt;- plsone(density ~ NIR, nf=6, data = yarn,scale=FALSE)
+cor(plstest1$th,yarn.pls$scores)
+cor(fitted(plstest1),yarn.pls$fitted.values[,,6])
+plot(fitted(plstest1),yarn.pls$fitted.values[,,6],pch=20,panel.first=c(grid()),cex=2)
+abline(0,1,col="red",lwd=2)
+# update fonction
+plstest2 &lt;- update(plstest1,nf=2)
+plstest2
+plstest1
+# with missing data
+data(yarn)
+yarn$NIR[sample(1:(268*28),300)] &lt;- rep(NA,300)
+plsna1 &lt;- plsone(density ~ NIR, nf=6, data = yarn,scale=FALSE,na.action=na.pass)
+plot(fitted(plstest1),fitted(plsna1),pch=20,panel.first=c(grid()),cex=2)
+abline(0,1,col="red",lwd=2)
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>plstools</em> version 1.0-6 <a href="00Index.html">Index</a>]</div>
+
+</body></html>
