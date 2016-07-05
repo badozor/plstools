@@ -1,11 +1,12 @@
-Package: ktabtools
+Package: plstools
 Type: Package
-Title: Additional R functions related to K-table analyses
-Version: 1.0
-Date: 2012-11-21
-Author: Pierre Bady <pierre.bady@unil.ch>
-Maintainer: Pierre Bady <pierre.bady@unil.ch>
-Depends: R (>= 2.15.0),ade4, mixOmics
-Suggests: ade4, boot
-Description: This package contains additional R functions related to K-table analyses and Multiblock-(s)pls.
+Title: PLS and GPLS models based on NIPALS algorithm
+Version: 1.0-8
+Date: 2008-09-18
+Author: Pierre BADY <pierre.bady@unil.ch>
+Maintainer: Pierre BADY <pierre.bady@unil.ch>
+Depends: R (>= 2.15.0),ade4
+Suggests: ade4, boot, pls, gpls
+Description: PLS regression of first generation and diagnostic tools
 License: GPL version 2 or newer
+LazyLoad: yes
