@@ -1,3 +1,7 @@
+<img src="logo/plstools_hex.png" align="right" width="130" alt="plstools logo"/>
+
+## R package plstools ##
+```
 Package: plstools
 Type: Package
 Title: PLS and GPLS models based on NIPALS algorithm
@@ -10,3 +14,4 @@ Suggests: ade4, boot, pls, gpls
 Description: PLS regression of first generation and diagnostic tools
 License: GPL version 2 or newer
 LazyLoad: yes
+```
